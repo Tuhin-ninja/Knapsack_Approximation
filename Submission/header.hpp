@@ -4,62 +4,16 @@ using namespace std;
 #define INF 100000010
 using MemoTable = vector<vector<int>>;
 
+// template <typename T>
 class Knapsack
 {
 public:
-    // vector<int> subset_sum_indices(vector<int> &arr, int target)
-    // {
-    //     int n = arr.size();
-    //     vector<vector<bool>> dp(n + 1, vector<bool>(target + 1, false));
-    //     for (int i = 0; i <= n; ++i)
-    //     {
-    //         dp[i][0] = true;
-    //     }
 
-    //     for (int i = 1; i <= n; ++i)
-    //     {
-    //         for (int j = 1; j <= target; ++j)
-    //         {
-    //             if (j < arr[i - 1])
-    //             {
-    //                 dp[i][j] = dp[i - 1][j];
-    //             }
-    //             else
-    //             {
-    //                 dp[i][j] = dp[i - 1][j] || dp[i - 1][j - arr[i - 1]];
-    //             }
-    //         }
-    //     }
-
-    //     if (!dp[n][target])
-    //     {
-    //         return vector<int>();
-    //     }
-
-    //     vector<int> indices;
-    //     int i = n, j = target;
-    //     while (i > 0 && j > 0)
-    //     {
-    //         if (dp[i - 1][j])
-    //         {
-    //             --i;
-    //         }
-    //         else
-    //         {
-    //             indices.push_back(i);
-    //             j -= arr[i - 1];
-    //             --i;
-    //         }
-    //     }
-
-    //     return indices;
-    // }
     pair<int, vector<int>> knapsackMaxValueMinWeightIndices(int W, const vector<int> &wt, const vector<int> &val)
     {
         int n = wt.size();
         vector<vector<pair<int, vector<int>>>> dp(n + 1, vector<pair<int, vector<int>>>(W + 1, {0, vector<int>()}));
 
-        // Build DP table
         for (int i = 1; i <= n; ++i)
         {
             for (int w = 1; w <= W; ++w)
@@ -84,9 +38,8 @@ public:
                     dp[i][w] = dp[i - 1][w];
                 }
             }
-        }
 
-        // Find the maximum value and minimum weight among all solutions with the maximum value
+        }
         pair<int, vector<int>> maxValMinWeightIndices = {0, vector<int>()};
         for (int w = 0; w <= W; ++w)
         {
@@ -128,7 +81,7 @@ public:
 
     void knapsack_solve_approx(vector<pair<int, int>> v, int n, int w, double epsilon)
     {
-        cout << "Rounded instance with epsilon = " << epsilon << endl;
+        cout << "Rounded instance with epsilon : " << epsilon << endl;
         int maximum = 0;
         for (int i = 0; i < n; i++)
         {
@@ -136,23 +89,27 @@ public:
         }
 
         double theta = (epsilon / (2 * n)) * maximum;
+        cout<<"Theta : ";
         cout << theta << endl;
         vector<pair<int, int>> pass;
+        vector<pair<int,int>> pass2; 
         for (int i = 0; i < n; i++)
         {
-            pass.push_back({ceil(v[i].first * 1.0 / theta), v[i].second});
+            double temp = ceil(v[i].first / theta);
+            double temp2 = round(temp*theta);
+            //cout<<temp2<<endl;
+            pass2.push_back({temp2, v[i].second});
+            //cout<<temp<<endl;
+            pass.push_back({temp, v[i].second});
         }
 
-        knapsack_solve(pass, n, w);
+        knapsack_solve(pass, n, w,1,theta);
+        knapsack_solve(pass2, n, w,2);
     }
 
-    void knapsack_solve(vector<pair<int, int>> &v, int n, int w)
+    void knapsack_solve(vector<pair<int, int>> &v, int n, int w, int c = 0,double theta = 0)
     {
         vector<int> result;
-        // for (int i = 0; i < n; i++)
-        // {
-        //     result.push_back(v[i].second);
-        // }
 
         vector<int> wt, val; 
         for (int i = 0; i < n; i++)
@@ -175,22 +132,37 @@ public:
             i++;
         }
 
+        
+
         vector<int> indices = knapsackMaxValueMinWeightIndices(w,wt, val).second;
-        cout << "Answer : " << value << endl;
-        // int usedWeight = 0;
-        // for (auto i : indices)
-        // {
-        //     usedWeight += v[i - 1].second;
-        // }
 
-        cout << "Used Weight : " << prevWeight << endl;
+        if(c == 0){ 
+            cout<<"Original Instance : "<<endl;
+            cout << "Answer : " << value << endl;
+            cout << "Used Weight : " << prevWeight << endl;
+            cout << "Indices : ";
+            for (auto i : indices)
+            {
+                cout << i << " ";
+            }
 
-        cout << "Indices : ";
-        for (auto i : indices)
-        {
-            cout << i << " ";
+            cout << endl<<endl;
         }
 
-        cout << endl;
+        else if(c == 1){ 
+            cout<<"Answer of Reduced Instance : "<<value<<endl; 
+            cout<<"Answer of Reduced Instance multiplied by Theta : "<<value*theta<<endl;
+            cout<<"Indices : "; 
+            for(auto i : indices){
+                cout<<i<<" ";
+            }
+            cout<<endl<<endl;
+        }
+
+        else if(c == 2){ 
+            cout<<"Answer of Original Instance (rounded up) : "<<value<<endl;
+            cout<<"Used Weight : "<<prevWeight<<endl;
+        }
+        
     }
 };

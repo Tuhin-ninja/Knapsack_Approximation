@@ -12,7 +12,7 @@ int main(){
         cin >> v[i].first >> v[i].second;
     }
 
-    //knapsack.knapsack_solve(v, n, w);
+    knapsack.knapsack_solve(v, n, w);
     knapsack.knapsack_solve_approx(v, n, w, 0.5);
    
 }
