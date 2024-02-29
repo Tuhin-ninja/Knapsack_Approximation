@@ -1,10 +1,9 @@
 #include "header.hpp"
 
-
-
 int main(){ 
    Knapsack knapsack;
    freopen("in2.txt","r", stdin); 
+   freopen("out.txt","w", stdout);
    int n, w;
     cin >> n >> w;
     vector<pair<int,int>> v(n);
@@ -14,5 +13,8 @@ int main(){
 
     knapsack.knapsack_solve(v, n, w);
     knapsack.knapsack_solve_approx(v, n, w, 0.5);
+    knapsack.knapsack_solve_approx(v,n,w,0.2); 
+    knapsack.knapsack_solve_approx(v,n,w,0.1); 
+    knapsack.knapsack_solve_approx(v,n,w,0.05); 
    
 }

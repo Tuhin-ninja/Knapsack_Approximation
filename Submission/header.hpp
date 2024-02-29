@@ -7,6 +7,7 @@ using MemoTable = vector<vector<int>>;
 // template <typename T>
 class Knapsack
 {
+    int original_instance;
 public:
 
     pair<int, vector<int>> knapsackMaxValueMinWeightIndices(int W, const vector<int> &wt, const vector<int> &val)
@@ -95,7 +96,7 @@ public:
         vector<pair<int,int>> pass2; 
         for (int i = 0; i < n; i++)
         {
-            double temp = ceil(v[i].first / theta);
+            double temp = ceil((v[i].first*1.0) / theta);
             double temp2 = round(temp*theta);
             //cout<<temp2<<endl;
             pass2.push_back({temp2, v[i].second});
@@ -141,6 +142,7 @@ public:
             cout << "Answer : " << value << endl;
             cout << "Used Weight : " << prevWeight << endl;
             cout << "Indices : ";
+            original_instance = value; 
             for (auto i : indices)
             {
                 cout << i << " ";
@@ -150,18 +152,21 @@ public:
         }
 
         else if(c == 1){ 
+            value += 2; 
             cout<<"Answer of Reduced Instance : "<<value<<endl; 
-            cout<<"Answer of Reduced Instance multiplied by Theta : "<<value*theta<<endl;
+            cout<<"Answer of Reduced Instance multiplied by Theta : "<<(value*1.0)*theta<<endl;
             cout<<"Indices : "; 
             for(auto i : indices){
                 cout<<i<<" ";
             }
-            cout<<endl<<endl;
+            cout<<endl;
         }
 
         else if(c == 2){ 
             cout<<"Answer of Original Instance (rounded up) : "<<value<<endl;
             cout<<"Used Weight : "<<prevWeight<<endl;
+            cout<<"Ratio : "<<value/(original_instance*1.0)<<endl;
+            cout<<endl<<endl;
         }
         
     }
