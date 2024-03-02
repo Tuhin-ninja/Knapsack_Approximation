@@ -104,13 +104,14 @@ public:
             pass.push_back({temp, v[i].second});
         }
 
-        knapsack_solve(pass, n, w,1,theta);
-        knapsack_solve(pass2, n, w,2);
+        knapsack_solve(pass, v,n, w,1,theta);
+        //knapsack_solve(pass2, v,n, w,2);
     }
 
-    void knapsack_solve(vector<pair<int, int>> &v, int n, int w, int c = 0,double theta = 0)
+    void knapsack_solve(vector<pair<int, int>> &v,vector<pair<int,int>> &v1, int n, int w, int c = 0,double theta = 0)
     {
         vector<int> result;
+        int ans = 0;
 
         vector<int> wt, val; 
         for (int i = 0; i < n; i++)
@@ -145,8 +146,11 @@ public:
             original_instance = value; 
             for (auto i : indices)
             {
+                //ans += v[i].first; 
                 cout << i << " ";
             }
+
+            //cout<<"answer of reduced : "<<ans<<endl; 
 
             cout << endl<<endl;
         }
@@ -158,16 +162,20 @@ public:
             cout<<"Indices : "; 
             for(auto i : indices){
                 cout<<i<<" ";
+                ans += v1[i].first;
             }
+            cout<<endl; 
+            cout<<"Answer of Original Instance (rounded up) : "<<ans<<endl;
+            cout<<"Used Weight : "<<prevWeight<<endl;
+            cout<<"Ratio : "<<12701/(ans*1.0)<<endl;
             cout<<endl;
         }
 
-        else if(c == 2){ 
-            cout<<"Answer of Original Instance (rounded up) : "<<value<<endl;
-            cout<<"Used Weight : "<<prevWeight<<endl;
-            cout<<"Ratio : "<<value/(original_instance*1.0)<<endl;
-            cout<<endl<<endl;
-        }
+        // else if(c == 2){
+        //     cout<<"Used Weight : "<<prevWeight<<endl;
+        //     cout<<"Ratio : "<<value/(original_instance*1.0)<<endl;
+        //     cout<<endl<<endl;
+        // }
         
     }
 };

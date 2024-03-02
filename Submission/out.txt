@@ -8,38 +8,34 @@ Theta : 8.40476
 Answer of Reduced Instance : 1514
 Answer of Reduced Instance multiplied by Theta : 12724.8
 Indices : 41 39 27 24 19 11 10 5 4 
-Answer of Original Instance (rounded up) : 12708
+Answer of Original Instance (rounded up) : 12675
 Used Weight : 649
-Ratio : 1.00055
-
+Ratio : 1.00205
 
 Rounded instance with epsilon : 0.2
 Theta : 3.3619
 Answer of Reduced Instance : 3782
 Answer of Reduced Instance multiplied by Theta : 12714.7
 Indices : 41 37 34 30 28 24 21 12 10 
-Answer of Original Instance (rounded up) : 12708
+Answer of Original Instance (rounded up) : 12680
 Used Weight : 654
-Ratio : 1.00055
-
+Ratio : 1.00166
 
 Rounded instance with epsilon : 0.1
 Theta : 1.68095
 Answer of Reduced Instance : 7562
 Answer of Reduced Instance multiplied by Theta : 12711.4
 Indices : 41 37 34 29 24 17 13 12 1 
-Answer of Original Instance (rounded up) : 12708
+Answer of Original Instance (rounded up) : 12681
 Used Weight : 659
-Ratio : 1.00055
-
+Ratio : 1.00158
 
 Rounded instance with epsilon : 0.05
 Theta : 0.840476
 Answer of Reduced Instance : 15115
 Answer of Reduced Instance multiplied by Theta : 12703.8
 Indices : 41 37 34 29 24 17 13 12 1 
-Answer of Original Instance (rounded up) : 12701
+Answer of Original Instance (rounded up) : 12681
 Used Weight : 659
-Ratio : 1
-
+Ratio : 1.00158
 
